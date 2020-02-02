@@ -2,7 +2,7 @@
 
 ## Overview
 
-An application built using React to help understand how the different sorting algorithims work
+An application built using React and react hooks to help understand how the different sorting algorithims work
 
 ## MVP
 
