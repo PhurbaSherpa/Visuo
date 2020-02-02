@@ -11,6 +11,8 @@ function bubbleSort(arr) {
     }
     if (!swapped) break;
   }
-
   return arr;
 }
+module.export = {
+  bubbleSort
+};
