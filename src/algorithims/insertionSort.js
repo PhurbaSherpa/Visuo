@@ -7,3 +7,7 @@ function insertionSort(arr) {
     arr[j + 1] = value;
   }
 }
+
+module.exports = {
+  insertionSort
+};
