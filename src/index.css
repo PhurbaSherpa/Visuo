@@ -26,3 +26,26 @@ code {
   height: 40%;
   width: 33%;
 }
+#generateArr {
+  height: 10vh;
+}
+
+#bars-container {
+  display: flex;
+  flex-direction: row;
+
+  height: 75vh;
+}
+.bar-container {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 75vh;
+}
+.bar {
+  border: black;
+  border-width: 100px;
+  border-color: black;
+  width: 5vw;
+  text-align: center;
+  background-color: cornflowerblue;
+}

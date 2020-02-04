@@ -6,24 +6,25 @@ export default function Graph() {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          let arr = new Array(15).fill(0).map(function(n) {
-            return Math.floor(Math.random() * (100 - 1) + 1);
-          });
-          setArr(arr);
-        }}
-        type="button"
-      >
-        Generate New Array
-      </button>
-      {arr.map((value, index) => {
-        return (
-          <div class="bar" key={index}>
-            {value}
-          </div>
-        );
-      })}
+      <div id="generateArr">
+        <button
+          onClick={() => {
+            let arr = new Array(20).fill(0).map(function(n) {
+              return Math.floor(Math.random() * (100 - 1) + 1);
+            });
+            setArr(arr);
+          }}
+          type="button"
+        >
+          Generate New Array
+        </button>
+      </div>
+
+      <div id="bars-container">
+        {arr.map((value, index) => {
+          return <Bar value={value} key={index} />;
+        })}
+      </div>
     </div>
   );
 }
