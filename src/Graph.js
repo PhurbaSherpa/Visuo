@@ -1,22 +1,30 @@
 import React, { useState } from "react";
 import Bar from "./Bar";
+const generateArr = require("./algorithims/generateNewArr");
 
-export default function Graph() {
+export default function Graph(props) {
   const [arr, setArr] = useState([]);
+  console.log(arr);
 
   return (
     <div>
       <div id="generateArr">
         <button
           onClick={() => {
-            let arr = new Array(20).fill(0).map(function(n) {
-              return Math.floor(Math.random() * (100 - 1) + 1);
-            });
+            let arr = generateArr();
             setArr(arr);
           }}
           type="button"
         >
           Generate New Array
+        </button>
+        <button
+          onClick={() => {
+            let newArr = props.algo(arr);
+            setArr([...newArr]);
+          }}
+        >
+          Sort
         </button>
       </div>
 

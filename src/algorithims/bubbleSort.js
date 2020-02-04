@@ -13,6 +13,4 @@ function bubbleSort(arr) {
   }
   return arr;
 }
-module.exports = {
-  bubbleSort
-};
+module.exports = bubbleSort;

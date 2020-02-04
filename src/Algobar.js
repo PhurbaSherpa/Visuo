@@ -7,7 +7,7 @@ export default function Algobar(props) {
         onClick={() => {
           props.setAlgo("Bubble Sort");
         }}
-        class="algo"
+        className="algo"
         type="button"
       >
         Bubble Sort
@@ -16,7 +16,7 @@ export default function Algobar(props) {
         onClick={() => {
           props.setAlgo("Insertion Sort");
         }}
-        class="algo"
+        className="algo"
         type="button"
       >
         Insertion Sort
@@ -25,7 +25,7 @@ export default function Algobar(props) {
         onClick={() => {
           props.setAlgo("Merge Sort");
         }}
-        class="algo"
+        className="algo"
         type="button"
       >
         Merge Sort
@@ -34,7 +34,7 @@ export default function Algobar(props) {
         onClick={() => {
           props.setAlgo("Quick Sort");
         }}
-        class="algo"
+        className="algo"
         type="button"
       >
         Quick Sort
@@ -43,7 +43,7 @@ export default function Algobar(props) {
         onClick={() => {
           props.setAlgo("Radix Sort");
         }}
-        class="algo"
+        className="algo"
         type="button"
       >
         Radix Sort
@@ -52,7 +52,7 @@ export default function Algobar(props) {
         onClick={() => {
           props.setAlgo("Selection Sort");
         }}
-        class="algo"
+        className="algo"
         type="button"
       >
         Selection Sort

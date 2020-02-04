@@ -15,6 +15,4 @@ function selectionSort(arr) {
   return arr;
 }
 
-module.exports = {
-  selectionSort
-};
+module.exports = selectionSort;

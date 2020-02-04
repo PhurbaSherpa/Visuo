@@ -40,12 +40,14 @@ code {
   display: flex;
   flex-direction: column-reverse;
   height: 75vh;
+  text-align: center;
 }
 .bar {
-  border: black;
-  border-width: 100px;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-width: 1px;
+  border-top-style: solid;
   border-color: black;
   width: 5vw;
-  text-align: center;
   background-color: cornflowerblue;
 }
