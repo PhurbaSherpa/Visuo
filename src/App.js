@@ -8,7 +8,7 @@ export default function App() {
   return (
     <div>
       <AlgoBar setAlgo={setAlgo} />
-      <div>Algo : {`${algo}`}</div>
+      <div>Algo : {algo}</div>
       <Graph />
     </div>
   );
