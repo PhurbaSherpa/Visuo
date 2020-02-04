@@ -33,13 +33,15 @@ export default function App() {
     case "Selection Sort":
       func = SelectionSort;
       break;
+    default:
+      func = BubbleSort;
   }
 
   return (
     <div>
       <AlgoBar setAlgo={setAlgo} />
       <div>Algo : {algo}</div>
-      <Graph algo={func} />
+      <Graph algo={algo} func={func} />
     </div>
   );
 }

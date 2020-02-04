@@ -1,12 +1,13 @@
-function insertionSort(arr) {
-  for (let i = 1; i < arr.length; i++) {
-    let value = arr[i];
-    for (var j = i - 1; j >= 0 && arr[j] > value; j--) {
+function insertionSort(arr, index = 1) {
+  var currentVal;
+  for (var i = index; i < arr.length; i++) {
+    currentVal = arr[i];
+    for (var j = i - 1; j >= 0 && arr[j] > currentVal; j--) {
       arr[j + 1] = arr[j];
     }
-    arr[j + 1] = value;
+    arr[j + 1] = currentVal;
+    return { arr, index: j + 1 };
   }
-  return arr;
 }
 
 module.exports = insertionSort;
