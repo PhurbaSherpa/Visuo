@@ -41,7 +41,7 @@ export default function Graph(props) {
                 setPermanent([...permanent]);
                 setArr([...newArr]);
               }
-            }, 1000);
+            }, 500);
           }}
         >
           Sort
