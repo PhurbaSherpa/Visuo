@@ -11,7 +11,7 @@ const {
 } = require("./algorithims");
 
 export default function App() {
-  const [algo, setAlgo] = useState("Bubble Sort");
+  const [algo, setAlgo] = useState("Choose an Algorithim");
 
   let func;
   switch (algo) {
@@ -34,7 +34,7 @@ export default function App() {
       func = SelectionSort;
       break;
     default:
-      func = BubbleSort;
+      func = null;
   }
 
   return (

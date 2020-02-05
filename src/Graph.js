@@ -9,6 +9,8 @@ export default function Graph(props) {
   const [permanent, setPermanent] = useState([]);
   const [stack, setStack] = useState([]);
   const [algo, setAlgo] = useState("Bubble Sort");
+  const [completed, setCompleted] = useState(true);
+  const [currentSort, setcurrentSort] = useState();
 
   if (props.algo !== algo) {
     let arr = generateArr();
@@ -17,9 +19,10 @@ export default function Graph(props) {
     setArr(arr);
     setSorted([...arr].sort((a, b) => a - b));
     setAlgo(props.algo);
+    setCompleted(false);
   }
 
-  return (
+  return props.func ? (
     <div>
       <div id="generateArr">
         <button
@@ -31,15 +34,18 @@ export default function Graph(props) {
             setSorted([...arr].sort((a, b) => a - b));
           }}
           type="button"
+          disabled={completed}
         >
           Generate New Array
         </button>
         <button
+          disabled={completed}
           onClick={() => {
             let newArr = arr;
+            setCompleted(true);
             let sort = setInterval(() => {
-              if (newArr.length === 1) newArr = newArr[0];
               if (compareArrays(newArr, sorted)) {
+                setCompleted(false);
                 clearInterval(sort);
               } else {
                 if (props.algo === "Quick Sort") {
@@ -60,8 +66,13 @@ export default function Graph(props) {
                   console.log("new", newArr);
                   permanent.push(returnObj.index);
                   setPermanent([...permanent]);
-                } else {
+                } else if (props.algo === "Merge Sort") {
+                  if (newArr.length === 1) newArr = newArr[0];
+                  else {
+                    newArr = props.func(newArr);
+                  }
                   console.log(newArr);
+                } else {
                   let index = permanent[permanent.length - 1]
                     ? permanent[permanent.length - 1] + 1
                     : 1;
@@ -71,12 +82,27 @@ export default function Graph(props) {
                   permanent.push(returnObj.index);
                   setPermanent([...permanent]);
                 }
+                setcurrentSort(sort);
                 setArr([...newArr]);
               }
             }, 500);
           }}
         >
           Sort
+        </button>
+        <button
+          onClick={() => {
+            clearInterval(currentSort);
+            let arr = generateArr();
+            setPermanent([]);
+            setStack([]);
+            setArr(arr);
+            setSorted([...arr].sort((a, b) => a - b));
+            setAlgo(props.algo);
+            setCompleted(false);
+          }}
+        >
+          Reset
         </button>
       </div>
       <div id="bars-container">
@@ -86,7 +112,7 @@ export default function Graph(props) {
                 <Bar
                   recheck={false}
                   value={value}
-                  permanent={true}
+                  done={true}
                   index={index}
                   key={index}
                 />
@@ -190,5 +216,5 @@ export default function Graph(props) {
             })}
       </div>
     </div>
-  );
+  ) : null;
 }

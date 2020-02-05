@@ -2,11 +2,10 @@ function mergeSort(array) {
   let result;
   if (!Array.isArray(array[0])) {
     result = array.map(num => [num]);
-    return { arr: result, index: 0 };
+    return result;
   } else {
     result = array;
   }
-
   if (result.length > 1) {
     const oddNumbered = result.length % 2 !== 0;
     let temp = [];
@@ -25,7 +24,7 @@ function mergeSort(array) {
 
     result = temp;
 
-    return { arr: temp, index: 0 };
+    return temp;
   }
 
   function merge(arrA, arrB) {
