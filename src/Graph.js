@@ -8,6 +8,16 @@ export default function Graph(props) {
   const [sorted, setSorted] = useState([]);
   const [permanent, setPermanent] = useState([]);
   const [stack, setStack] = useState([]);
+  const [algo, setAlgo] = useState("Bubble Sort");
+
+  if (props.algo !== algo) {
+    let arr = generateArr();
+    setPermanent([]);
+    setStack([]);
+    setArr(arr);
+    setSorted([...arr].sort((a, b) => a - b));
+    setAlgo(props.algo);
+  }
 
   return (
     <div>
@@ -37,11 +47,26 @@ export default function Graph(props) {
                   let newStack = returnObj.stack;
                   setStack([...newStack]);
                   newArr = returnObj.arr;
+                } else if (
+                  props.algo === "Selection Sort" ||
+                  props.algo === "Radix Sort"
+                ) {
+                  if (!permanent.includes(0)) permanent.push(0);
+                  let index = permanent[permanent.length - 1]
+                    ? permanent[permanent.length - 1]
+                    : 0;
+                  let returnObj = props.func(newArr, index);
+                  newArr = returnObj.arr;
+                  console.log("new", newArr);
+                  permanent.push(returnObj.index);
+                  setPermanent([...permanent]);
                 } else {
+                  console.log(newArr);
                   let index = permanent[permanent.length - 1]
                     ? permanent[permanent.length - 1] + 1
                     : 1;
                   let returnObj = props.func(newArr, index);
+                  console.log(returnObj);
                   newArr = returnObj.arr;
                   permanent.push(returnObj.index);
                   setPermanent([...permanent]);
@@ -105,7 +130,6 @@ export default function Graph(props) {
           ? arr.map((inner, index) => {
               let changeColor = false;
               if (index % 2 === 0) changeColor = true;
-              console.log(changeColor);
               if (Array.isArray(inner)) {
                 return inner.map((value, index) => {
                   // console.log(value);
@@ -139,7 +163,31 @@ export default function Graph(props) {
                 />
               );
             })
-          : null}
+          : props.algo === "Selection Sort"
+          ? arr.map((value, index) => {
+              let changeColor = false;
+              if (permanent.includes(index)) changeColor = true;
+              return (
+                <Bar
+                  permanent={changeColor}
+                  value={value}
+                  index={index}
+                  key={index}
+                />
+              );
+            })
+          : arr.map((value, index) => {
+              let changeColor = false;
+              if (permanent.includes(index)) changeColor = true;
+              return (
+                <Bar
+                  permanent={changeColor}
+                  value={value}
+                  index={index}
+                  key={index}
+                />
+              );
+            })}
       </div>
     </div>
   );
