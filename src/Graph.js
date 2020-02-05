@@ -7,6 +7,7 @@ export default function Graph(props) {
   const [arr, setArr] = useState([]);
   const [sorted, setSorted] = useState([]);
   const [permanent, setPermanent] = useState([]);
+  const [stack, setStack] = useState([]);
 
   return (
     <div>
@@ -15,6 +16,7 @@ export default function Graph(props) {
           onClick={async () => {
             let arr = generateArr();
             setPermanent([]);
+            setStack([]);
             setArr(arr);
             setSorted([...arr].sort((a, b) => a - b));
           }}
@@ -29,16 +31,21 @@ export default function Graph(props) {
               if (newArr.length === 1) newArr = newArr[0];
               if (compareArrays(newArr, sorted)) {
                 clearInterval(sort);
-                console.log("hiiii");
               } else {
-                let index = permanent[permanent.length - 1]
-                  ? permanent[permanent.length - 1] + 1
-                  : 1;
-                let returnObj = props.func(newArr, index);
-                newArr = returnObj.arr;
-                console.log(newArr);
-                permanent.push(returnObj.index);
-                setPermanent([...permanent]);
+                if (props.algo === "Quick Sort") {
+                  let returnObj = props.func(newArr, stack);
+                  let newStack = returnObj.stack;
+                  setStack([...newStack]);
+                  newArr = returnObj.arr;
+                } else {
+                  let index = permanent[permanent.length - 1]
+                    ? permanent[permanent.length - 1] + 1
+                    : 1;
+                  let returnObj = props.func(newArr, index);
+                  newArr = returnObj.arr;
+                  permanent.push(returnObj.index);
+                  setPermanent([...permanent]);
+                }
                 setArr([...newArr]);
               }
             }, 500);
@@ -114,6 +121,23 @@ export default function Graph(props) {
               } else {
                 return <Bar value={inner} index={index} key={index} />;
               }
+            })
+          : props.algo === "Quick Sort"
+          ? arr.map((value, index) => {
+              let permanent = false;
+              if (stack.length > 0) {
+                if (stack[0].includes(index)) {
+                  permanent = true;
+                }
+              }
+              return (
+                <Bar
+                  permanent={permanent}
+                  value={value}
+                  index={index}
+                  key={index}
+                />
+              );
             })
           : null}
       </div>
