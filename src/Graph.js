@@ -24,18 +24,23 @@ export default function Graph(props) {
         </button>
         <button
           onClick={() => {
+            let newArr = arr;
             let sort = setInterval(() => {
-              console.log(compareArrays(arr, sorted));
-              if (compareArrays(arr, sorted)) clearInterval(sort);
-              let index = permanent[permanent.length - 1]
-                ? permanent[permanent.length - 1] + 1
-                : 1;
-              let returnObj = props.func(arr, index);
-              let newArr = returnObj.arr;
-              permanent.push(returnObj.index);
-              console.log(permanent);
-              setPermanent([...permanent]);
-              setArr([...newArr]);
+              if (newArr.length === 1) newArr = newArr[0];
+              if (compareArrays(newArr, sorted)) {
+                clearInterval(sort);
+                console.log("hiiii");
+              } else {
+                let index = permanent[permanent.length - 1]
+                  ? permanent[permanent.length - 1] + 1
+                  : 1;
+                let returnObj = props.func(newArr, index);
+                newArr = returnObj.arr;
+                console.log(newArr);
+                permanent.push(returnObj.index);
+                setPermanent([...permanent]);
+                setArr([...newArr]);
+              }
             }, 1000);
           }}
         >
@@ -88,6 +93,27 @@ export default function Graph(props) {
                   key={index}
                 />
               );
+            })
+          : props.algo === "Merge Sort"
+          ? arr.map((inner, index) => {
+              let changeColor = false;
+              if (index % 2 === 0) changeColor = true;
+              console.log(changeColor);
+              if (Array.isArray(inner)) {
+                return inner.map((value, index) => {
+                  // console.log(value);
+                  return (
+                    <Bar
+                      value={value}
+                      permanent={changeColor}
+                      index={index}
+                      key={index}
+                    />
+                  );
+                });
+              } else {
+                return <Bar value={inner} index={index} key={index} />;
+              }
             })
           : null}
       </div>
