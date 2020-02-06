@@ -36,11 +36,16 @@ code {
 
   height: 75vh;
 }
+.bars-container {
+  width: 100vw;
+}
+
 .bar-container {
   display: flex;
   flex-direction: column-reverse;
   height: 75vh;
   text-align: center;
+  width: 100vw;
 }
 .bar {
   border-right-style: solid;
@@ -48,6 +53,6 @@ code {
   border-top-width: 1px;
   border-top-style: solid;
   border-color: black;
-  width: 5vw;
+  width: 90%;
   background-color: cornflowerblue;
 }
